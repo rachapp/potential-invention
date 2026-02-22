@@ -1,5 +1,8 @@
 import { Player } from './player.js';
 import { Ball, Block, Particle } from './entities.js';
+import { Player } from './player.js';
+import { Ball, Block, Particle } from './entities.js';
+import { playBounceSound, playExplosionSound } from './audio.js'; // <-- ADD THIS LINE
 
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
@@ -78,8 +81,14 @@ function gameLoop() {
     ball.x += ball.dx;
     ball.y += ball.dy;
 
-    if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) ball.dx *= -1;
-    if (ball.y - ball.radius < 0) ball.dy *= -1;
+    if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
+        ball.dx *= -1;
+        playBounceSound();
+    }
+    if (ball.y - ball.radius < 0) {
+        ball.dy *= -1;
+        playBounceSound();
+    }
 
     // Reset if ball falls off bottom
     if (ball.y > canvas.height) {
@@ -95,6 +104,7 @@ function gameLoop() {
         ball.x >= player.x && ball.x <= player.x + player.width) {
         ball.dy *= -1;
         ball.y = player.y - ball.radius; // Prevent getting stuck inside
+        playBounceSound();
     }
 
     // 4. Ball & Block Collisions
@@ -113,6 +123,7 @@ function gameLoop() {
                 
                 triggerShake();
                 spawnParticles(block.x + block.width/2, block.y + block.height/2, block.color);
+                playExplosionSound();
             }
         }
     });
