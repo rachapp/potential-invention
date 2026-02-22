@@ -1,0 +1,7 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# If you ever use Node.js in the future
+node_modules/
+dist/
