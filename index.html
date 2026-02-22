@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Potential Invention - The Game</title>
+    <title>Potential Invention - Destructive Pong</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="game-container">
-        <h1>Catch the Cube</h1>
+    <div id="game-wrapper">
+        <div id="ui">
+            <span id="scoreDisplay">Score: 0</span> | 
+            <span id="levelDisplay">Level: 1</span> | 
+            <span class="upgrade-text">Press 'Space' for Wider Paddle (Costs 50)</span>
+        </div>
         <canvas id="gameCanvas" width="800" height="600"></canvas>
-        <p>Use Arrow Keys to move.</p>
     </div>
     <script type="module" src="js/main.js"></script>
 </body>
